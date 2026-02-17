@@ -1,0 +1,1134 @@
+-- \/ swords 
+local REK = Instance.new("RemoteEvent")REK.Name = "K" -- idk
+local RE = Instance.new("RemoteEvent")RE.Name = "CS" -- classic sword
+local RE2 = Instance.new("RemoteEvent")RE2.Name = "FFS" -- 2nd sword
+local FS = Instance.new("RemoteEvent")FS.Name = "FS" -- 3rd sword
+local FB = Instance.new("RemoteEvent")FB.Name = "FB" -- 4th sword
+local MS = Instance.new("RemoteEvent")MS.Name = "MS" -- 5th sword
+-- \/ ability remote events
+local FF = Instance.new("RemoteEvent")FF.Name = "FF" -- forcefield
+local FF2 = Instance.new("RemoteEvent")FF2.Name = "FF2" -- invis thang
+local FF3 = Instance.new("RemoteEvent")FF3.Name = "FF3" -- invis thang
+local Iv = Instance.new("RemoteEvent")Iv.Name = "Iv" -- invis
+local Iv2 = Instance.new("RemoteEvent")Iv2.Name = "Iv2" -- invis
+local TSLOW = Instance.new("RemoteEvent")TSLOW.Name = "TSLOW"-- aoe slow ability
+local EF = Instance.new("RemoteEvent")EF.Name = "EF" -- timestop effect
+local TSM = Instance.new("RemoteEvent")TSM.Name = "TSM"
+local FP = Instance.new("RemoteEvent")FP.Name = "FP" -- Flame Pillars
+local FireBall = Instance.new("RemoteEvent")FireBall.Name = "FireBall" --Fire Ball
+-- \/ random locals
+local cam = workspace.CurrentCamera
+local RS = game:GetService("RunService")
+local Uis = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TweenService = game:GetService("TweenService")
+-- \/ create tools to call on
+local tool = ReplicatedStorage.Weapons.ClassicSword
+local tool2 = ReplicatedStorage.Weapons.GhostSword
+local tool3 = ReplicatedStorage.Weapons.TimeSword
+local tool4 = ReplicatedStorage.Weapons.FireSword
+local tool5 = ReplicatedStorage.Weapons.MageSword
+-- \/ 1 locations
+local tp1 = CFrame.new(54.489, 8.5, -45.005)
+local tp2 = CFrame.new(29.278, 8.5, -18.346)
+local tp3 = CFrame.new(34.942, -24, -13.787)
+local tp4 = CFrame.new(38.514, -23, 35.054)
+local tp5 = CFrame.new(-22.5, -27.5, -8)
+local tp6 = CFrame.new(-9.543, -18, 35.353)
+local tp7 = CFrame.new(-43.762, 8.5, 63.348)
+local tp8 = CFrame.new(-22.5, 8.5, 35)
+local tp9 = CFrame.new(-17.409, 8.5, -42.729)
+local tp10 = CFrame.new(-49.5, 8.5, -40)
+local tp11 = CFrame.new(2.792, 11, 9.932)
+local tp12 = CFrame.new(19.292, 11, 9.932)
+local tp13 = CFrame.new(-11.439, 8.5, -13.265)
+local MTP1 = CFrame.new(-37.406, 9, -87.034)
+-- \/ put the remote events in rep storage
+FB.Parent = game.ReplicatedStorage
+REK.Parent = game.ReplicatedStorage
+RE.Parent = game.ReplicatedStorage
+RE2.Parent = game.ReplicatedStorage
+FF.Parent = game.ReplicatedStorage
+FF2.Parent = game.ReplicatedStorage
+FF3.Parent = game.ReplicatedStorage
+Iv.Parent = game.ReplicatedStorage
+Iv2.Parent = game.ReplicatedStorage
+TSLOW.Parent = game.ReplicatedStorage
+FS.Parent = game.ReplicatedStorage
+EF.Parent = game.ReplicatedStorage
+FP.Parent = game.ReplicatedStorage
+TSM.Parent = game.ReplicatedStorage
+FireBall.Parent = game.ReplicatedStorage
+MS.Parent = game.ReplicatedStorage
+----
+----
+----
+----
+---- below is for weps
+----
+----
+----
+----
+----
+RE.OnServerEvent:Connect(function(Player)
+	local vars = {tp1, tp2, tp3, tp4, tp5, tp6, tp7, tp8, tp9, tp10, tp11, tp12, tp13}
+	local rnd = vars[math.random(#vars)]
+	local backpack = Player:FindFirstChild("Backpack")
+	local gui = game.ReplicatedStorage["Weapon Guis"].WG1
+	local startergui = Player:FindFirstChild("PlayerGui")
+	gui:Clone().Parent = startergui
+	tool:Clone().Parent = backpack
+	Player.Character:FindFirstChild("HumanoidRootPart").CFrame = rnd
+end) 
+--classic sword
+----
+---- above is the classic sword scripts
+---- below is the invis sword scripts
+----
+----
+RE2.OnServerEvent:Connect(function(Player)
+	local vars = {tp1, tp2, tp3 ,tp4, tp5, tp6}
+	local rnd = vars[math.random(#vars)]
+	local backpack = Player:FindFirstChild("Backpack")
+	local gui = game.ReplicatedStorage["Weapon Guis"].WG2
+	local startergui = Player:FindFirstChild("PlayerGui")
+	gui:Clone().Parent = startergui
+	tool2:Clone().Parent = backpack
+	Player.Character:FindFirstChild("HumanoidRootPart").CFrame = rnd
+end)-- Light Sword
+Iv.OnServerEvent:Connect(function(Player) -- go invis -- this is the server side for the invis dash ability
+	for i, v in ipairs(Player.Character:GetDescendants()) do
+		if (v:IsA("BasePart") or v:IsA("Decal")) and v.Name ~= "HumanoidRootPart" then
+			v.Transparency = 1 -- went invis
+		end
+	end
+end)
+Iv2.OnServerEvent:Connect(function(Player)
+	for i, v in ipairs(Player.Character:GetDescendants()) do
+		if (v:IsA("BasePart") or v:IsA("Decal")) and v.Name ~= "HumanoidRootPart" then
+			v.Transparency = 0 -- left invis
+		end
+	end 
+end) -- leave invis -- end of invis dash ability
+FF.OnServerEvent:Connect(function(Player) -- go invis -- this is the server side for the invis ability
+	for i, v in ipairs(Player.Character:GetDescendants()) do
+		if (v:IsA("BasePart") or v:IsA("Decal")) and v.Name ~= "HumanoidRootPart" then
+			v.Transparency = .65 -- transparent
+		end
+	end
+end)
+FF2.OnServerEvent:Connect(function(Player) -- leave invis
+	for i, v in ipairs(Player.Character:GetDescendants()) do
+		if  (v:IsA("BasePart") or v:IsA("Decal")) and v.Name ~= "HumanoidRootPart" then
+			v.Transparency = 0 -- not transparent
+		end
+	end
+end)
+FF3.OnServerEvent:Connect(function(Player) -- forcefield --- this is the end for the invis ability
+	local name = Player.Name
+	local ff = Instance.new("ForceField")ff.Name = name
+	ff.Parent = game.ReplicatedStorage
+	ff.Parent = Player.Character
+	ff.Visible = false
+	task.wait(6)
+	ff:Destroy()
+end)
+-- Ghost sword is above
+--
+--
+-- fire sword is below
+FB.OnServerEvent:Connect(function(Player) -- flame ability E
+	local vars = {tp1, tp2, tp3 ,tp4, tp5, tp6} 
+	local rnd = vars[math.random(#vars)]
+	local backpack = Player:FindFirstChild("Backpack")
+	local gui = game.ReplicatedStorage["Weapon Guis"].WG4
+	local startergui = Player:FindFirstChild("PlayerGui")
+	gui:Clone().Parent = startergui
+	tool4:Clone().Parent = backpack
+	Player.Character:FindFirstChild("HumanoidRootPart").CFrame = rnd
+end)
+FP.OnServerEvent:Connect(function(Player)
+	local Char = Player.Character
+	local hum = Player.Character:FindFirstChild("Humanoid")
+	local hrp = Player.Character:FindFirstChild("HumanoidRootPart")
+	local FPiller = Instance.new("Part")FPiller.Name = "FlamePiller"
+	local FPiller2 = Instance.new("Part")FPiller.Name = "FlamePiller"
+	local FPiller3 = Instance.new("Part")FPiller.Name = "FlamePiller"
+	local GBreak = Instance.new("Part")GBreak.Name = "GroundBreak"
+	local decal = Instance.new("Decal", GBreak)
+	decal.Texture = "rbxassetid://12333806419"
+	decal.Face = Enum.NormalId.Top
+	local anim = Instance.new("Animation")
+	anim.AnimationId = "rbxassetid://15646209846"
+	local animt = hum:LoadAnimation(anim)
+	local info = TweenInfo.new(.25, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0)
+	local goal = {Size=Vector3.new(7,5,7)}
+	local goal2 = {Size=Vector3.new(7,10,7)}
+	local goal3 = {Size=Vector3.new(7,15,7)}
+	local tween = TweenService:Create(FPiller, info,goal)
+	local tween2 = TweenService:Create(FPiller2, info,goal2)
+	local tween3 = TweenService:Create(FPiller3, info,goal3)
+	local affectedPlayers = {}
+	
+	GBreak.Parent = ReplicatedStorage.Abilites
+	GBreak.Anchored = true
+	GBreak.CanTouch = true
+	GBreak.CanCollide = false
+	GBreak.Transparency = 1
+	GBreak.Size = Vector3.new(10,1,10)
+	GBreak.Parent = workspace
+	animt:Play()
+	wait(.5)
+	
+	
+	GBreak.Position = hrp.Position + hrp.CFrame.LookVector * 0 + hrp.CFrame.XVector * .5 + hrp.CFrame.YVector * -3.5 + hrp.CFrame.ZVector * -.5
+	
+
+	FPiller.Parent = ReplicatedStorage.Abilites
+	FPiller.Anchored = true
+	FPiller.CanCollide = false
+	FPiller.CanTouch = true
+	FPiller.Color = Color3.new(0.756863, 0.745098, 0.258824)
+	FPiller.Material = Enum.Material.Neon
+	FPiller.Size = Vector3.new(3, 1, 3)
+	FPiller.Parent = workspace
+	FPiller.Position = hrp.Position + hrp.CFrame.LookVector * 10 + hrp.CFrame.YVector * -1 
+	tween:Play()
+
+	FPiller.Touched:Connect(function(hit)
+		-- check for a player
+		if hit.Parent:FindFirstChild("Humanoid") then
+			-- if a specific player is not found in a table, add them to it, then damage them
+			if not table.find(affectedPlayers, hit.Parent.Name) and hit.Parent:FindFirstChild("Humanoid").Health > 0 then
+				table.insert(affectedPlayers, hit.Parent.Name)
+
+				hit.Parent.Humanoid:TakeDamage(15)
+
+				task.wait(.5)
+
+				-- remove the player from the table so they can take damage again
+				local i = table.find(affectedPlayers, hit.Parent.Name)
+				table.remove(affectedPlayers, i)
+			end
+		end
+	end)
+
+	wait(.3)
+	FPiller2.Parent = ReplicatedStorage.Abilites
+	FPiller2.Anchored = true
+	FPiller2.CanCollide = false
+	FPiller2.CanTouch = true
+	FPiller2.Color = Color3.new(0.937255, 0.721569, 0.219608)
+	FPiller2.Material = Enum.Material.Neon
+	FPiller2.Size = Vector3.new(3, 1, 3)
+	FPiller2.Parent = workspace
+	FPiller2.Position = hrp.Position + hrp.CFrame.LookVector * 20 + hrp.CFrame.YVector * 2
+	tween2:Play()
+	
+	FPiller2.Touched:Connect(function(hit)
+		-- check for a player
+		if hit.Parent:FindFirstChild("Humanoid") then
+			-- if a specific player is not found in a table, add them to it, then damage them
+			if not table.find(affectedPlayers, hit.Parent.Name) and hit.Parent:FindFirstChild("Humanoid").Health > 0 then
+				table.insert(affectedPlayers, hit.Parent.Name)
+
+				hit.Parent.Humanoid:TakeDamage(30)
+
+				task.wait(1)
+
+				-- remove the player from the table so they can take damage again
+				local i = table.find(affectedPlayers, hit.Parent.Name)
+				table.remove(affectedPlayers, i)
+			end
+		end
+	end)
+	
+	wait(.3)
+	FPiller3.Parent = ReplicatedStorage.Abilites
+	FPiller3.Anchored = true
+	FPiller3.CanCollide = false
+	FPiller3.CanTouch = true
+	FPiller3.Color = Color3.new(1, 0.690196, 0)
+	FPiller3.Material = Enum.Material.Neon
+	FPiller3.Size = Vector3.new(3, 1, 3)
+	FPiller3.Parent = workspace
+	FPiller3.Position = hrp.Position + hrp.CFrame.LookVector * 30 + hrp.CFrame.YVector * 4
+	tween3:Play()
+	
+	FPiller3.Touched:Connect(function(hit)
+		-- check for a player
+		if hit.Parent:FindFirstChild("Humanoid") then
+			-- if a specific player is not found in a table, add them to it, then damage them
+			if not table.find(affectedPlayers, hit.Parent.Name) and hit.Parent:FindFirstChild("Humanoid").Health > 0 then
+				table.insert(affectedPlayers, hit.Parent.Name)
+
+				hit.Parent.Humanoid:TakeDamage(40)
+
+				task.wait(1)
+
+				-- remove the player from the table so they can take damage again
+				local i = table.find(affectedPlayers, hit.Parent.Name)
+				table.remove(affectedPlayers, i)
+			end
+		end
+	end)
+	
+	wait("3")
+	FPiller:Remove()
+	FPiller2:Remove()
+	FPiller3:Remove()
+	GBreak:Remove()
+end)
+FireBall.OnServerEvent:Connect(function(Player) --Growing Fireball Q
+	local hrp = Player.Character:FindFirstChild("HumanoidRootPart")
+	local Char = Player.Character
+	local hum = Player.Character:FindFirstChild("Humanoid")
+	local FBall = Instance.new("Part")FBall.Name = "FireBall"
+	local info = TweenInfo.new(1 , Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0)
+	local goal = {Size=Vector3.new(6.68, 6.68, 6.68), CFrame = hrp.CFrame + hrp.CFrame.LookVector * 50}
+	local tween = TweenService:Create(FBall, info, goal)
+	local affectedPlayers = {}
+	
+	FBall.Parent = ReplicatedStorage.Abilites
+	FBall.CanCollide = false
+	FBall.Anchored = true
+	FBall.Color = Color3.new(0.666667, 0, 0)
+	FBall.Material = Enum.Material.Neon
+	FBall.Size = Vector3.new(1, 1, 1)
+	FBall.Parent = workspace
+	FBall.Position = hrp.Position + hrp.CFrame.LookVector * 3 + hrp.CFrame.YVector * 1 
+	FBall.Shape = Enum.PartType.Ball
+	FBall.Touched:Connect(function(hit)
+		-- check for a player
+		if hit.Parent.name == Player.Name then
+			return 
+		else
+		if hit.Parent:FindFirstChild("Humanoid") then
+			-- if a specific player is not found in a table, add them to it, then damage them
+			if not table.find(affectedPlayers, hit.Parent.Name) and hit.Parent:FindFirstChild("Humanoid").Health > 0 then
+				table.insert(affectedPlayers, hit.Parent.Name)
+
+				hit.Parent.Humanoid:TakeDamage(20)
+
+				task.wait(1)
+
+				-- remove the player from the table so they can take damage again
+				local i = table.find(affectedPlayers, hit.Parent.Name)
+				table.remove(affectedPlayers, i)
+			end
+		end
+	end
+end)
+	tween:Play()
+	task.wait("1.2")
+	FBall:Remove()
+end)
+
+----
+---- Fire sword is above
+---- time sword is below
+----
+FS.OnServerEvent:Connect(function(Player)
+	local vars = {tp1, tp2, tp3, tp4, tp5, tp6, tp7, tp8, tp9, tp10, tp11, tp12, tp13}
+	local rnd = vars[math.random(#vars)]
+	local backpack = Player:FindFirstChild("Backpack")
+	local gui = game.ReplicatedStorage["Weapon Guis"].WG3
+	local startergui = Player:FindFirstChild("PlayerGui")
+	local name = Player.Name
+	local val = Instance.new("NumberValue")val.Name = name
+	val.Parent = Player.Character
+	val.Value = 1
+	gui:Clone().Parent = startergui
+	tool3:Clone().Parent = backpack
+	Player.Character:FindFirstChild("HumanoidRootPart").CFrame = rnd
+end)
+-- time stop is below
+TSLOW.OnServerEvent:Connect(function(Player)
+	local Pillar = Instance.new("Part")Pillar.Name = "TSlow" 
+	Pillar.Parent = ReplicatedStorage.Abilites
+	Pillar.Anchored = true
+	Pillar.CanCollide = false
+	Pillar.CanTouch = true
+	Pillar.Transparency = 1 --use .35 if u want it to be visible
+	Pillar.Color = Color3.new(1, 0.239216, 0.184314)
+	Pillar.Size = Vector3.new(36,12,36) 
+	local hum = Player.Character:FindFirstChild("Humanoid")
+	local name = Player.Name
+	local hrp = Player.Character:FindFirstChild("HumanoidRootPart")
+	local val1 = Player.Character:FindFirstChild(name)
+	local val2 = Instance.new("NumberValue")val2.Name = "V2"
+	local Values = {}
+	local Sphere = Instance.new("Part")Sphere.Name = "TSC"
+	Sphere.Shape = Enum.PartType.Ball
+	Sphere.Parent = ReplicatedStorage.Abilites
+	Sphere.Anchored = true
+	Sphere.CanCollide = false
+	Sphere.CanTouch = false
+	Sphere.Transparency = .75
+	Sphere.Material = Enum.Material.SmoothPlastic
+	Sphere.Color = Color3.new(0.105882, 0.105882, 0.105882)
+	local anim = Instance.new("Animation")
+	anim.AnimationId = "rbxassetid://15643564127"
+	local zaward = Instance.new("Sound")
+	zaward.Parent = workspace.Sounds
+	zaward.SoundId = "rbxassetid://7514417921"
+	local clocktick = Instance.new("Sound")
+	clocktick.Parent = workspace.Sounds
+	clocktick.SoundId = "rbxassetid://3587054956"
+	clocktick.Looped = true
+	local tresume = Instance.new("Sound")
+	tresume.Parent = workspace.Sounds
+	tresume.SoundId = "rbxassetid://3101648169"
+	local animt = hum:LoadAnimation(anim)
+	animt:Play()
+	zaward:Play()
+	task.wait(1.25) -- time for anim to play(windup)
+	Pillar.Parent = workspace
+	Pillar.Position = hrp.Position + hrp.CFrame.LookVector * 0
+	Sphere.Parent = workspace
+	Sphere.Position = hrp.Position + hrp.CFrame.LookVector * 0
+	Pillar.Touched:Connect(function(hit)
+		if hit.Parent:FindFirstChild("Humanoid") then
+			EF:FireAllClients(Player,1)
+			local info = TweenInfo.new(.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0)
+			local goal = {Size=Vector3.new(36,36,36)}
+			local tween = TweenService:Create(Sphere, info,goal)
+			tween:Play()
+		end
+		if hit.Parent:FindFirstChild("Humanoid") and not hit.Parent:FindFirstChild(name) then
+			local clone = val2:Clone()
+				clone.Parent = hit.Parent
+				table.insert(Values,clone)
+				if hit.Parent:FindFirstChild("V2") then -- box effects
+							hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - .5 
+							hit.Parent.Humanoid.WalkSpeed = 0
+							hit.Parent.Humanoid.JumpPower = 0
+							for _, object in pairs(Values) do
+							object:Remove()
+							end
+							Values = {}
+							wait(5) -- ability duration
+							hit.Parent.Humanoid.WalkSpeed = 16
+							hit.Parent.Humanoid.JumpPower = 50
+				end
+			end
+		task.wait(1.25)
+		Pillar:Destroy()
+	end)
+	task.wait(1.25) -- waits for anim windup(same time as anim windup)
+	clocktick:Play()
+	task.wait(3.75) -- cd minus anim windup'
+	clocktick:Remove()
+	Sphere:Remove()
+	tresume:Play()
+end)
+-- time throw is below
+TSM.OnServerEvent:Connect(function(Player, MousePos)
+		local affectedPlayers = {}
+		local info = TweenInfo.new(.25, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0)
+		local goal = {CFrame = MousePos}
+		local hum = Player.Character:FindFirstChild("Humanoid")
+		local name = Player.Name
+		local hrp = Player.Character:FindFirstChild("HumanoidRootPart")
+		local anim = Instance.new("Animation")
+		anim.AnimationId = "rbxassetid://15646355468"
+		local animt = hum:LoadAnimation(anim)
+		local SP = Instance.new("Part")SP.Name = "SP"
+		local bv = Instance.new("BodyVelocity",SP )
+		local mesh = Instance.new("SpecialMesh",SP)
+	mesh.MeshId = "rbxassetid://15170610"
+	mesh.TextureId = "rbxassetid://6825099800"
+		SP.Parent = ReplicatedStorage.Abilites
+		SP.CanCollide = false
+		SP.CanTouch = true
+		SP.Transparency = 0 
+		SP.Color = Color3.new(1, 0.239216, 0.184314) 
+		SP.Size = Vector3.new(10,10,10)
+		animt:Play()
+		task.wait(.35)
+		SP.Position = hrp.Position + hrp.CFrame.LookVector * 3.5
+		SP.Parent = workspace
+		SP.Anchored = true
+		local tween = TweenService:Create(SP,info,goal)
+	task.wait(2)
+	SP.Touched:Connect(function(hit)
+		if hit.Parent:FindFirstChild("Humanoid") then
+			if not table.find(affectedPlayers, hit.Parent.Name) and hit.Parent:FindFirstChild("Humanoid").Health > 0 and not hit.Parent:FindFirstChild(name) then
+				table.insert(affectedPlayers, hit.Parent.Name)
+				hit.Parent.Humanoid:TakeDamage(1.5)
+				local i = table.find(affectedPlayers, hit.Parent.Name)
+				table.remove(affectedPlayers, i)
+			end
+		end
+	end)
+	SP.Anchored = false
+	SP.Transparency = 1
+	tween:Play()
+	SP.Anchored = true
+	task.wait(2)
+	SP:Remove()
+end)
+--
+--
+--
+--
+-- above is time sword stuff
+-- below is mage sword stuffs
+--
+--
+--
+--
+MS.OnServerEvent:Connect(function(Player)
+	local vars = {tp1, tp2, tp3, tp4, tp5, tp6, tp7, tp8, tp9, tp10, tp11, tp12, tp13}
+	local rnd = vars[math.random(#vars)]
+	local backpack = Player:FindFirstChild("Backpack")
+	local gui = game.ReplicatedStorage["Weapon Guis"].WG5
+	local startergui = Player:FindFirstChild("PlayerGui")
+	local name = Player.Name
+	local val = Instance.new("NumberValue")val.Name = name
+	val.Parent = Player.Character
+	val.Value = 1
+	gui:Clone().Parent = startergui
+	tool5:Clone().Parent = backpack
+	Player.Character:FindFirstChild("HumanoidRootPart").CFrame = rnd
+end)
+----
+----
+----
+----
+---- above is for weps
+---- below is kill bricks
+----
+----
+----
+----
+local kil1l = game.workspace.Map.KillBrick.KB
+kil1l.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kil2l = game.workspace.Map.KillBrick.WKB
+kil2l.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.QB1
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.QB2
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.QB3
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.QB4
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.QB5
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.QB6
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.QB7
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.QB8
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.snowball
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.borderfloor
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.borderwall1
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.borderwall2
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.borderwall3
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local kill = game.Workspace.Map.KillBrick.borderwall4
+kill.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+----
+----
+----
+----
+----above is kill bricks
+----below is for non random tps
+----
+----
+----
+----
+local PT = game.Workspace.P1
+PT.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent:FindFirstChild("HumanoidRootPart").CFrame = MTP1
+	end
+end)
+----
+----
+----
+---- above is for random tps
+---- below is for map gimmicks
+----
+----
+----
+----
+----
+local wspa = workspace.Map["Main Map"]["Sand Area"].Gimmick:GetDescendants() -- sand traps
+local t = {}
+for p, wspa in wspa do 
+	if wspa:HasTag("Sand") then
+		wspa.Touched:Connect(function(hit)
+			local char = hit.Parent
+			local i = table.find(t, hit.Parent.Name)
+			local info = TweenInfo.new(2, Enum.EasingStyle.Linear, Enum.EasingDirection.In)
+			local tween = TweenService:Create(wspa, info, {Transparency = 1})
+			if hit.Parent:FindFirstChild("Humanoid") then
+				if not table.find(t, hit.Parent.Name) and hit.Parent:FindFirstChild("Humanoid").Health > 0 then
+					table.insert(t, hit.Parent.Name)
+					print("e")
+					tween:Play()
+
+					hit.Parent.Humanoid.WalkSpeed = 1
+					hit.Parent.Humanoid.JumpPower = 0
+					task.wait(3.5)
+					wspa.CanCollide = false
+					task.wait(.25)
+					hit.Parent.Humanoid.WalkSpeed = 16
+					hit.Parent.Humanoid.JumpPower = 50
+					wspa.Transparency = 0
+					wspa.CanCollide = true
+					table.remove(t, i)
+				end
+			end
+		end)
+	end
+end
+-- below is grass traps
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap1
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap2
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap3
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap4
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap5
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap6
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap7
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap8
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap9
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap10
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap11
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap12
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap13
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap14
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap15
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap16
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap17
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+local trap = game.Workspace.Map["Main Map"]["Grass Area"].Gimmick.Trap18
+local d = trap.Down
+local u = trap.Up
+d.Touched:Connect(function(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 20
+		d.CanTouch = false
+		d.CanCollide = false
+		d.Transparency = 1 
+		u.Transparency = 0
+		u.CanCollide = true
+		hit.Parent.Humanoid.WalkSpeed = 5
+		hit.Parent.Humanoid.JumpPower = 0.001
+		task.wait(3)
+		hit.Parent.Humanoid.WalkSpeed = 16
+		hit.Parent.Humanoid.JumpPower = 50
+		u.CanCollide = false
+		u.Transparency = 1
+		d.CanCollide = true
+		d.CanTouch = true
+		d.Transparency = 0
+	end
+end)
+-- Snow area gimmick--
+local gimmick = workspace.Map["Main Map"]["Snow Area"].Gimmick
+local ball = workspace.Map.KillBrick.snowball
+local wall1 = gimmick.Resetball1
+local wall2 = gimmick.Resetball2
+local wall3 = gimmick.Resetball3
+local wall4 = gimmick.Resetball4
+local ballpostion = ball.Position
+local holdingwall = gimmick.Holdingwall
+
+
+holdingwall.Touched:Connect(function(hit)
+	if hit == ball then
+		wait("30")
+		holdingwall.CanCollide = false
+		wait(".5")
+		holdingwall.CanCollide = true
+	end
+end)
+
+
+
+wall1.Touched:Connect(function(part)
+	if part == ball then
+		ball.Position = ballpostion
+	end
+end)
+
+wall2.Touched:Connect(function(part)
+	if part == ball then
+		ball.Position = ballpostion
+	end
+end)
+
+
+wall3.Touched:Connect(function(part)
+	if part == ball then
+		ball.Position = ballpostion
+	end
+end)
+
+
+wall4.Touched:Connect(function(part)
+	if part == ball then
+		ball.Position = ballpostion
+	end
+end)
+
+while ballpostion do
+	wait("60")
+	print("Ball reset")
+	ball.Position = ballpostion
+end
+----
+----
+----
+----
+---- you reached the end
+----
+----
+----
+----
+----
